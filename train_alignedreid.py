@@ -5,7 +5,7 @@ import datetime
 import argparse
 import os.path as osp
 import numpy as np
-
+import os
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
@@ -27,8 +27,8 @@ from IPython import embed
 
 parser = argparse.ArgumentParser(description='Train AlignedReID with cross entropy loss and triplet hard loss')
 # Datasets
-parser.add_argument('--root', type=str, default='data', help="root path to data directory")
-parser.add_argument('-d', '--dataset', type=str, default='market1501',
+parser.add_argument('--root', type=str, default='/unsullied/sharefs/yejiacheng/isilon-home/pytorch/dataset/person_search/coco_format_sysu/reid', help="root path to data directory")
+parser.add_argument('-d', '--dataset', type=str, default='sysu',
                     choices=data_manager.get_names())
 parser.add_argument('-j', '--workers', default=4, type=int,
                     help="number of data loading workers (default: 4)")
@@ -54,7 +54,7 @@ parser.add_argument('--start-epoch', default=0, type=int,
 parser.add_argument('--train-batch', default=32, type=int,
                     help="train batch size")
 parser.add_argument('--test-batch', default=32, type=int, help="test batch size")
-parser.add_argument('--lr', '--learning-rate', default=0.0002, type=float,
+parser.add_argument('--lr', '--learning-rate', default=0.0003, type=float,
                     help="initial learning rate")
 parser.add_argument('--stepsize', default=150, type=int,
                     help="stepsize to decay learning rate (>0 means this is enabled)")
@@ -78,7 +78,7 @@ parser.add_argument('--evaluate', action='store_true', help="evaluation only")
 parser.add_argument('--eval-step', type=int, default=-1,
                     help="run evaluation for every N epochs (set to -1 to test after training)")
 parser.add_argument('--start-eval', type=int, default=0, help="start to evaluate after specific epoch")
-parser.add_argument('--save-dir', type=str, default='log')
+parser.add_argument('--save-dir', type=str, default='log1')
 parser.add_argument('--use_cpu', action='store_true', help="use cpu")
 parser.add_argument('--gpu-devices', default='0', type=str, help='gpu device ids for CUDA_VISIBLE_DEVICES')
 parser.add_argument('--reranking',action= 'store_true', help= 'result re_ranking')
